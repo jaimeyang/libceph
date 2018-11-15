@@ -2,7 +2,7 @@
 #include <string>
 #include <rados/librados.h>
 
-int main(int argc,char **argv) {
+int main(int argc,const char **argv) {
     rados_t cluster;
     char cluster_name[] = "ceph";
     char user_name[] = "client.admin";
@@ -31,6 +31,25 @@ int main(int argc,char **argv) {
     }
 
     err = rados_conf_parse_argv(cluster,argc,argv);
-    if
+    if (err < 0 )
+    {
+        fprintf(stderr,"%s:cannot parse comand line arguments:%s\n",argv[0],strerror(-err));
+        exit(-1);
+    }
+    else
+    {
+        printf("\nRead the comand line arguments\n");
+    }
+
+    err = rados_connect(cluster);
+    if ( err < 0 )
+    {
+        fprintf(stderr,"%s:cannot parse comand line arguments:%s\n",argv[0],strerror(-err));
+        exit(-1);
+    }
+    else
+    {
+        printf("\nConnected to the cluster");
+    }
     return 0;
 }
