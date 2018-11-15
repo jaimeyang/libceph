@@ -7,4 +7,4 @@ include_directories(/usr/include)
 
 LINK_LIBRARIES(rados)
 
-add_executable(ceph-client main.cpp)
+add_executable(ceph-client main.cpp ceph.cpp ceph.h)
